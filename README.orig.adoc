@@ -57,24 +57,26 @@ must be installed on the Ansible controller.
 
 [source,yaml]
 ----
-variable: default value
+pandoc_install_method: "release"
 ----
-Description
+One of "`release`" or "`system`".
 
+=== Role Variables used by the `system`-installation-method
 
-[source,yaml]
-----
-variable: [OS-specific by default, see /vars directory]
-----
-Description
+_None_.
 
+=== Role Variables used by the `release`-installation-method
 
 [source,yaml]
 ----
-variable: [OS-specific by default, see /vars directory]
+pandoc_release_version: 2.2.1
 ----
-(Debian/Ubuntu only)
-Description
+The target version of pandoc to install _and_ check-against.
+See https://github.com/jgm/pandoc/releases/[Pandoc's GitHub Releases Page]
+for available versions.
+
+[NOTE]
+The default was taken from the version https://packages.debian.org/buster/pandoc[as packaged in Debian Buster].
 
 
 [[public_vars]]
@@ -119,15 +121,37 @@ image:https://raw.githubusercontent.com/JonasPammer/ansible-roles/master/graphs/
 requirements.yml dependency graph of jonaspammer.pandoc]
 ====
 
-.Minimum Viable Play
+
+.Install pandoc using the version from the systems package manager
 ====
 [source,yaml]
 ----
 roles:
-  - "jonaspammer.pandoc"
+    - "pandoc"
+----
+====
+
+.Install a specific version of pandoc using an official release file
+====
+.Using the default
+[source,yaml]
+----
+roles:
+    - "pandoc"
 
 vars:
-  some_var: "some_value"
+  pandoc_install_method: release
+----
+
+.Specifying an own release
+[source,yaml]
+----
+roles:
+    - "pandoc"
+
+vars:
+  pandoc_install_method: release
+  pandoc_release_version: 2.2.1
 ----
 ====
 

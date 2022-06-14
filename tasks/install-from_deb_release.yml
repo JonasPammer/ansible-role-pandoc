@@ -1,0 +1,35 @@
+---
+# tasks file of jonaspammer.pandoc
+- name: check if pandoc is installed using dpkg
+  command: "dpkg-query --show pandoc"
+  register: pandoc__register_command_dpkg_query_pandoc
+  failed_when: pandoc__register_command_dpkg_query_pandoc.rc > 1
+  changed_when: false
+
+- name: Uninstall pandoc package if installed but version does not match the configured one.
+  package:
+    name: "pandoc"
+    state: absent
+  register: _pandoc_uninstall
+  when: pandoc__register_command_dpkg_query_pandoc.rc == 0 and pandoc__register_command_dpkg_query_pandoc.stdout in pandoc_release_version
+
+
+- block:
+    - name: create temporary directory for pandoc debian release package (when install is needed)
+      ansible.builtin.tempfile:
+        state: directory
+        suffix: "pandoc-{{ pandoc_release_version }}"
+      register: pandoc__register_tempfile_directory_for_release
+      changed_when: false
+
+    - name: Download pandoc debian release package (when install is needed).
+      get_url:
+        url: "https://github.com/jgm/pandoc/releases/download/{{ pandoc_release_version }}/pandoc-{{ pandoc_release_version }}-1-amd64.deb"
+        dest: "{{ pandoc__register_tempfile_directory_for_release.path }}/pandoc-{{pandoc_release_version}}.deb"
+
+    - name: Install pandoc from debian release package (when install is needed).
+      become: true
+      apt:
+        deb: "{{ pandoc__register_tempfile_directory_for_release.path }}/pandoc-{{pandoc_release_version}}.deb"
+        state: present
+  when: pandoc__register_command_dpkg_query_pandoc.rc == 1 or _pandoc_uninstall.changed

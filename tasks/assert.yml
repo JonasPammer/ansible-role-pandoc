@@ -1,10 +1,14 @@
 ---
 # tasks file for testing that variables of ansible-role jonaspammer.pandoc are set correctly
 
-# - name: test if variable_name is set correctly
-#   ansible.builtin.assert:
-#     that:
-#       - variable_name is defined
-#       - variable_name is number
-#       - variable_name >= 0
-#     quiet: true
+- name: test if pandoc_release_version is set correctly
+  ansible.builtin.assert:
+    that:
+      - pandoc_install_method in ["system", "release"]
+    quiet: true
+
+- name: test if pandoc_release_version is set correctly
+  ansible.builtin.assert:
+    that:
+      - pandoc_release_version is defined
+    quiet: true

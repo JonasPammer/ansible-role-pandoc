@@ -1,0 +1,6 @@
+---
+# tasks file of jonaspammer.pandoc
+- name: Install pandoc system package.
+  ansible.builtin.package:
+    name: "pandoc"
+    state: present

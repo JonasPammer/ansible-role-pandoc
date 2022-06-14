@@ -5,3 +5,10 @@
   ansible.builtin.import_tasks: assert.yml
   run_once: true
   delegate_to: localhost
+
+- name: Include Tasks for installing pandoc (when installation-method is 'release' and ansible_os_family is Debian)
+  ansible.builtin.include_tasks: install-from_deb_release.yml
+  when: pandoc_install_method == "release" and ansible_os_family == "Debian"
+- name: Include Tasks for installing pandoc (when installation-method is 'system' or 'package')
+  ansible.builtin.include_tasks: install-using_system.yml
+  when: pandoc_install_method in ["system"]

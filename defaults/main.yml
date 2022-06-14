@@ -1,3 +1,6 @@
 ---
 # defaults file of ansible-role jonaspammer.pandoc
 # See README.adoc for documentation. If you change a default here, also update it in the README.
+
+pandoc_install_method: "release"
+pandoc_release_version: 2.2.1
