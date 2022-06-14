@@ -13,7 +13,6 @@
   register: _pandoc_uninstall
   when: pandoc__register_command_dpkg_query_pandoc.rc == 0 and pandoc__register_command_dpkg_query_pandoc.stdout in pandoc_release_version
 
-
 - block:
     - name: create temporary directory for pandoc debian release package (when install is needed)
       ansible.builtin.tempfile:
