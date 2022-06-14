@@ -24,11 +24,11 @@
     - name: Download pandoc debian release package (when install is needed).
       get_url:
         url: "https://github.com/jgm/pandoc/releases/download/{{ pandoc_release_version }}/pandoc-{{ pandoc_release_version }}-1-amd64.deb"
-        dest: "{{ pandoc__register_tempfile_directory_for_release.path }}/pandoc-{{pandoc_release_version}}.deb"
+        dest: "{{ pandoc__register_tempfile_directory_for_release.path }}/pandoc-{{ pandoc_release_version }}.deb"
 
     - name: Install pandoc from debian release package (when install is needed).
       become: true
       apt:
-        deb: "{{ pandoc__register_tempfile_directory_for_release.path }}/pandoc-{{pandoc_release_version}}.deb"
+        deb: "{{ pandoc__register_tempfile_directory_for_release.path }}/pandoc-{{ pandoc_release_version }}.deb"
         state: present
   when: pandoc__register_command_dpkg_query_pandoc.rc == 1 or _pandoc_uninstall.changed
