@@ -3,4 +3,4 @@
   hosts: all
 
   roles:
-    - role: "ansible-role-pandoc"
+    - name: "ansible-role-pandoc"
