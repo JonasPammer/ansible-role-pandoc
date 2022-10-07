@@ -4,14 +4,14 @@
 repos:
   ### GENERAL ###
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v8.0.0
+    rev: v9.1.0
     hooks:
       - id: commitlint
         stages: [commit-msg]
         additional_dependencies: ["@commitlint/config-conventional"]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.2.0
+    rev: v4.3.0
     hooks:
       - id: check-case-conflict
       - id: check-symlinks
@@ -23,7 +23,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.2.0
+    rev: v1.3.0
     hooks:
       - id: detect-secrets
         exclude: |
@@ -33,12 +33,12 @@ repos:
 
   # opinionated code formatter for all things frontend (also includes Markdown, JSON, YAML)
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v2.6.2
+    rev: v3.0.0-alpha.0
     hooks:
       - id: prettier
 
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.26.3
+    rev: v1.28.0
     hooks:
       - id: yamllint
         args: [-c=.yamllint]
@@ -60,13 +60,13 @@ repos:
 
   ### PYTHON ###
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.32.0
+    rev: v2.38.2
     hooks:
       - id: pyupgrade
         args: [--py37-plus]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.2.0
+    rev: v4.3.0
     hooks:
       - id: check-ast
       - id: check-builtin-literals
@@ -77,12 +77,12 @@ repos:
       - id: requirements-txt-fixer
 
   - repo: https://github.com/asottile/setup-cfg-fmt
-    rev: v1.20.1
+    rev: v2.0.0
     hooks:
       - id: setup-cfg-fmt
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.942
+    rev: v0.981
     hooks:
       - id: mypy
         additional_dependencies: [] # as per requirements.txt
@@ -90,26 +90,26 @@ repos:
   # pip-compile`s 'requirements.in' files as its recommended to have the 'requirements.txt' version
   # checked into source control too.
   - repo: https://github.com/jazzband/pip-tools
-    rev: 6.6.0
+    rev: 6.8.0
     hooks:
       - id: pip-compile
 
   # the uncompromising (opinionated / barely configurable) PEP8 Python code formatter.
   - repo: https://github.com/psf/black
-    rev: "22.3.0"
+    rev: "22.8.0"
     hooks:
       - id: black
 
   # isort alternative
   - repo: https://github.com/asottile/reorder_python_imports
-    rev: v3.0.1
+    rev: v3.8.3
     hooks:
       - id: reorder-python-imports
         args: [--py37-plus, --add-import, "from __future__ import annotations"]
 
   # formats docstrings to follow PEP 257.
   - repo: https://github.com/PyCQA/docformatter
-    rev: v1.4
+    rev: v1.5.0
     hooks:
       - id: docformatter
         args: [--in-place]
@@ -121,7 +121,7 @@ repos:
   #   some third-party plugins
   # …to check the style and quality of python code.
   - repo: https://github.com/pycqa/flake8
-    rev: "4.0.1"
+    rev: "5.0.4"
     hooks:
       - id: flake8
 
