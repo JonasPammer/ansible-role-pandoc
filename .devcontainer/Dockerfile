@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-focal
+FROM mcr.microsoft.com/vscode/devcontainers/base:1-focal
 
 
 ############################################################
